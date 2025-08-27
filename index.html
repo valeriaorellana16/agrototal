@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listado de Imagenes 2025 - Grupo MultiPC</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Playfair+Display:wght@700&family=Roboto+Condensed:wght@700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .header-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            max-width: 1200px;
+        }
+
+        .titulo-principal {
+            background-color: #CC7722; /* Amarillo ocre */
+            padding: 15px 30px;
+            text-align: center;
+            margin-bottom: 10px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 32px;
+            color: #000;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            width: fit-content;
+            max-width: 90%;
+        }
+
+        .subtitulo {
+            background-color: #FFD700; /* Amarillo intenso */
+            padding: 12px 25px;
+            text-align: center;
+            margin-bottom: 10px;
+            font-family: 'Playfair Display', serif;
+            font-size: 26px;
+            color: #000;
+            font-style: italic;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            width: fit-content;
+            max-width: 90%;
+        }
+
+        .contacto {
+            background-color: #0047AB; /* Azul intenso */
+            padding: 12px 25px;
+            text-align: center;
+            margin-bottom: 20px;
+            font-family: 'Roboto Condensed', sans-serif;
+            font-size: 22px;
+            color: #FFF;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            width: fit-content;
+            max-width: 90%;
+        }
+
+        .galeria-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .imagen-card {
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            background-color: white;
+            transition: transform 0.3s ease;
+        }
+
+        .imagen-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+        }
+
+        .imagen-container {
+            height: 200px;
+            background-color: #eee;
+            overflow: hidden;
+        }
+
+        .imagen-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .imagen-card:hover .imagen-container img {
+            transform: scale(1.05);
+        }
+
+        .descripcion {
+            padding: 15px;
+            text-align: center;
+            color: #333;
+            font-size: 14px;
+            line-height: 1.4;
+            min-height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .loading {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #666;
+        }
+
+        .error-message {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #d32f2f;
+            text-align: center;
+            width: 100%;
+            padding: 0 10px;
+        }
+        
+        .links-section {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .link-item {
+            margin-bottom: 15px;
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .link-item:last-child {
+            border-bottom: none;
+        }
+        
+        .link-description {
+            margin-bottom: 10px;
+            color: #555;
+            font-size: 16px;
+        }
+        
+        .link-url {
+            margin-bottom: 10px;
+            color: #666;
+            font-size: 14px;
+            word-break: break-all;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            border-radius: 6px;
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 15px;
+            width: 220px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 8px rgba(0,0,0,0.15);
+        }
+        
+        .btn:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+        }
+        
+        .btn-success {
+            background: linear-gradient(135deg, #2ecc71, #27ae60);
+        }
+        
+        .btn-warning {
+            background: linear-gradient(135deg, #f39c12, #e67e22);
+        }
+        
+        .btn-danger {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+        }
+        
+        .btn-info {
+            background: linear-gradient(135deg, #1abc9c, #16a085);
+        }
+        
+        .btn-semaforo {
+            animation: cambioColor 4s infinite;
+        }
+        
+        @keyframes cambioColor {
+            0% { background: linear-gradient(135deg, #e74c3c, #c0392b); }
+            33% { background: linear-gradient(135deg, #e74c3c, #c0392b); }
+            34% { background: linear-gradient(135deg, #f39c12, #e67e22); }
+            66% { background: linear-gradient(135deg, #f39c12, #e67e22); }
+            67% { background: linear-gradient(135deg, #2ecc71, #27ae60); }
+            100% { background: linear-gradient(135deg, #2ecc71, #27ae60); }
+        }
+        
+        .btn-container {
+            margin-top: 10px;
+        }
+        
+        /* Estilos para el footer de copyright */
+        .copyright-footer {
+            margin-top: 40px;
+            padding: 15px;
+            text-align: center;
+            width: 100%;
+            background-color: #333;
+            color: #FFF;
+            font-family: 'Roboto Condensed', sans-serif;
+            font-size: 16px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+    </style>
+</head>
+<body>
+    <div class="header-container">
+        <h1 class="titulo-principal">Agro Total - parte de Grupo MultiPC</h1>
+        <h2 class="subtitulo">desde 1,998 innovando para el desarrollo</h2>
+        <h3 class="contacto">Whatsapp +502 4376-9408 Pbx 6633-6986</h3>
+    </div>
+    
+    <div class="galeria-container" id="galeria">
+        <!-- Las imágenes se generarán dinámicamente con JavaScript -->
+    </div>
+    
+    <div class="links-section">
+        <h2>REGISTRO PARA RECIBIR MAS INFORMACIÓN</h2>
+        
+        <div class="link-item">
+            <p class="link-description">Regístrate ahora y obtén un Descuento Adicional"</p>
+            <span class="link-url">https://forms.gle/DHCokcjf3dG1JudN8</span>
+            <div class="btn-container">
+                <a href="https://forms.gle/DHCokcjf3dG1JudN8" target="_blank" class="btn btn-primary">Acceder al formulario</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer con copyright añadido al final -->
+    <div class="copyright-footer">
+        © 2025 GRUPO MULTI-PC - Todos los derechos reservados
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const galeria = document.getElementById('galeria');
+            const baseUrl = 'https://grupomultipc.github.io/agrototal/';
+            const totalImagenes = 12;
+
+            // Array con descripciones para cada imagen
+            const descripciones = [
+                "Millar de Pilon de Tomate p52  Q1,100",
+                "Millar de pilon de Pimiento  Q1,100",
+                "Malla Agril para agricultura  ",
+                "Saran en varios calibres",
+                "Bandejas para Pilones",
+                "Sustratos para Pilones y hidroponia",
+                "Microaspersores para riego por goteo",
+                "Sistemas Solares Basicos para Agricultura",
+                "Temporizadores Automaticos de llave de paso de agua",
+                "Suministros para Hidroponia",
+                "Suministros para Acuicultura",
+                "Medidores para Tierra  y para Agua "
+            ];
+
+            // Crear contenedores para cada imagen
+            for (let i = 1; i <= totalImagenes; i++) {
+                const nombreArchivo = `imagen${i}.jpg`;
+                const imagenUrl = baseUrl + nombreArchivo;
+                
+                // Crear la tarjeta completa
+                const card = document.createElement('div');
+                card.className = 'imagen-card';
+
+                // Contenedor de la imagen
+                const container = document.createElement('div');
+                container.className = 'imagen-container';
+
+                const loading = document.createElement('div');
+                loading.className = 'loading';
+                loading.textContent = `Cargando imagen ${i}...`;
+
+                const img = document.createElement('img');
+                img.src = imagenUrl;
+                img.alt = `Imagen ${i}`;
+                img.loading = 'lazy';
+                
+                // Crear elemento para la descripción
+                const descripcion = document.createElement('div');
+                descripcion.className = 'descripcion';
+                // Usar la descripción del array o una por defecto si no existe
+                descripcion.textContent = descripciones[i-1] || `Producto ${i} - Descripción detallada del artículo`;
+
+                // Manejar carga exitosa
+                img.onload = function() {
+                    loading.style.display = 'none';
+                };
+
+                // Manejar errores
+                img.onerror = function() {
+                    loading.textContent = '';
+                    loading.className = 'error-message';
+                    loading.innerHTML = `Imagen ${i} no encontrada<br><small>${nombreArchivo}</small>`;
+                    img.style.display = 'none';
+                };
+
+                container.appendChild(loading);
+                container.appendChild(img);
+                
+                card.appendChild(container);
+                card.appendChild(descripcion);
+                
+                galeria.appendChild(card);
+            }
+        });
+    </script>
+</body>
+</html>
